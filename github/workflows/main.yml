@@ -1,0 +1,24 @@
+name: Bot Update Otomatis
+
+on:
+  schedule:
+    # Setiap tanggal 14 jam 06:00 WIB
+    # (Jam 06:00 WIB dikurangi 7 jam = Jam 23:00 UTC tanggal 13)
+    - cron: '0 23 13 * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: pip install requests
+      - name: Jalankan Bot
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: python send_update.py
