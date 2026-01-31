@@ -2,9 +2,8 @@ name: Bot Update Otomatis
 
 on:
   schedule:
-    # Setiap tanggal 14 jam 06:00 WIB
-    # (Jam 06:00 WIB dikurangi 7 jam = Jam 23:00 UTC tanggal 13)
     - cron: '0 23 13 * *'
+  workflow_dispatch:
 
 jobs:
   build:
